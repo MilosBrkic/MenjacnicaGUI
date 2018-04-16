@@ -59,7 +59,7 @@ public class MenjacnicaGUI extends JFrame {
 	private JPanel panelStatus;
 	private JMenuBar menuBar;
 	private JScrollPane scrollStatus;
-	private JTextPane statusTextPane;
+	static JTextPane statusTextPane;
 	private JMenu mnFile;
 	private JMenu mnHelp;
 	private JMenuItem mntmOpen;
@@ -127,6 +127,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnDodajKurs() {
 		if (btnDodajKurs == null) {
 			btnDodajKurs = new JButton("Dodaj kurs");
+			btnDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dodajKurs();
+				}
+			});
 		}
 		return btnDodajKurs;
 	}
@@ -321,6 +326,11 @@ public class MenjacnicaGUI extends JFrame {
 	private JMenuItem getMntmDodajKurs() {
 		if (mntmDodajKurs == null) {
 			mntmDodajKurs = new JMenuItem("Dodaj kurs");
+			mntmDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					dodajKurs();
+				}
+			});
 		}
 		return mntmDodajKurs;
 	}
@@ -342,5 +352,14 @@ public class MenjacnicaGUI extends JFrame {
 		int opcija = JOptionPane.showConfirmDialog(null, "Da li zelite da izadjete iz programa?", "Izlaz", JOptionPane.YES_NO_CANCEL_OPTION);
 		if(opcija == JOptionPane.YES_OPTION)
 			System.exit(0);
+	}
+	
+	private void dodajKurs() {
+		DodajKursGUI prozor = new DodajKursGUI();
+		prozor.setVisible(true);
+	}
+	
+	public static void ispisiKurs(String s) {
+		statusTextPane.setText(statusTextPane.getText()+s+"\n");
 	}
 }
